@@ -60,7 +60,7 @@ var question2 = function() {
     fill(72, 0, 255);
     text("Question:",40,60);
     fill(0, 0, 0);
-    text("What is HTML stand for?", 85, 100);
+    text("What does HTML stand for?", 85, 100);
     
     
     //possible answer
@@ -81,3 +81,96 @@ var question2 = function() {
 
 };
 
+
+var question3 = function() {
+    themeBackGround();
+    
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",40,60);
+    fill(0, 0, 0);
+    text("What does CSS stand for?", 85, 100);
+    
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",45,230);
+    fill(0, 0, 0);
+    text("Computer Style Sheet",73,260); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,255,10,10);
+    fill(0, 0, 0);
+    text("Colorful Style Sheet",73,290); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,285,10,10);
+    fill(0, 0, 0);
+    text("Cascading Style Sheets",73,320); // correct answer
+    fill(255, 255, 255);   
+    ellipse(60,315,10,10); 
+
+};
+
+
+var question4 = function() {
+    themeBackGround();
+    
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",40,60);
+    fill(0, 0, 0);
+    text("How does a WHILE loop start?", 20, 100);
+    
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",45,230);
+    fill(0, 0, 0);
+    text(" while (i <= 10) ",73,260); // correct answer
+    fill(255, 255, 255);
+    ellipse(60,255,10,10);
+    fill(0, 0, 0);
+    text(" while (i <= 10; i++)",73,290); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,285,10,10);
+    fill(0, 0, 0);
+    text(" while i = 1 to 10",73,320); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(60,315,10,10); 
+
+};
+
+
+
+var question5 = function() {
+    themeBackGround();
+    
+    //questions asked
+    textSize(17);
+    fill(72, 0, 255);
+    text("Question:",40,60);
+    fill(0, 0, 0);
+    text("Which of these is not a type of loop in JavaScript?", 13, 100);
+    
+    
+    //possible answer
+    textSize(20);
+    fill(0, 21, 255);
+    text("Answer:",45,230);
+    fill(0, 0, 0);
+    text(" for loop",73,260); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,255,10,10);
+    fill(0, 0, 0);
+    text(" repeat loop",73,290); // correct answer
+    fill(255, 255, 255);
+    ellipse(60,285,10,10);
+    fill(0, 0, 0);
+    text(" while loop ",73,320); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(60,315,10,10); 
+
+};
+
+question5();
