@@ -173,4 +173,35 @@ var question5 = function() {
 
 };
 
-question5();
+var question6 = function() {
+    themeBackGround();
+    
+    //questions asked
+    textSize(19);
+    fill(72, 0, 255);
+    text("Question:",40,60);
+    fill(0, 0, 0);
+    text("Which of the following type of variable takes", 17, 100);
+    text("precedence over other if names are same?", 22, 120);
+    
+    
+    //possible answer
+    textSize(20);
+    fill(0, 21, 255);
+    text("Answer:",45,230);
+    fill(0, 0, 0);
+    text(" Gobal Variable",73,260); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,255,10,10);
+    fill(0, 0, 0);
+    text(" Lobal Variable",73,290); // correct answer
+    fill(255, 255, 255);
+    ellipse(60,285,10,10);
+    fill(0, 0, 0);
+    text(" Both of the Above",73,320); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(60,315,10,10); 
+
+};
+
+question6();
