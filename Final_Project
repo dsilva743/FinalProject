@@ -1,8 +1,13 @@
+/**A mimic of the game JOEPARDY! 
+Most of the game is design by a button method **/
+
 //Global variables
 var currentScene = 0;
 var splashScreen;
 var instructScreen;
+var gameScreen; 
 var score = 0;
+var question = 0;
 
 //Draws blackboard and boarders
 var themeBackGround = function() {
@@ -25,6 +30,7 @@ var themeBackGround = function() {
     triangle(400, 361, 401, 400, 350, 400);
 
 };
+
 
 // Dom & Lee's Bitmoji
 var drawBitMoji = function(bitX, bitY, bitHeight) {
@@ -71,7 +77,7 @@ var drawBitMoji = function(bitX, bitY, bitHeight) {
         
         fill(250, 247, 247); //text color
         textSize(bitHeight/100*23); // text size
-        text("DS",bitX-(bitHeight/100*14),bitY+(bitHeight/100*67)); //initials
+        text("DS",bitX-(bitHeight/100*0),bitY+(bitHeight/100*59)); //initials
         };
 var head = function(x,y,h){
 
@@ -160,8 +166,9 @@ Button.prototype.draw = function() {
     fill(179, 61, 61);
     rect(this.x, this.y, this.width, this.height, 5);
     fill(255, 255, 255);
+    textAlign(CENTER, CENTER);
     textSize(19);
-    text(this.label, this.x+6, this.y+this.height/1.5);
+    text(this.label, this.x+47, this.y+this.height/1.9);
 };
 Button.prototype.isMouseInside = function() {
     return mouseX > this.x &&
@@ -175,15 +182,29 @@ Button.prototype.handleMouseClick = function() {
     }
 };
 
+
+//Back button when on question screen
+var backButtonQ = new Button ({
+    x: 145,
+    y: 345,
+    width: 92,
+    height: 40,
+    label: "Go Back",
+    onClick: function() {
+        currentScene = 2;
+        loop();
+    }
+});
+
 //Start game button
 var startButton = new Button ({
     x: 58,
     y: 322,
     width: 101,
     height: 40,
-    label: "Start Here",
+    label: "  Start Here",
     onClick: function() {
-        currentScene = 1;
+        currentScene = 2;
     }
 });
 
@@ -191,46 +212,309 @@ var startButton = new Button ({
 var instructions = new Button ({
     x: 211,
     y: 322,
-    width: 115,
+    width: 111,
     height: 40,
-    label: "How to play!",
+    label: "    How to play!",
     onClick: function() {
-        currentScene = 2;
-
+        currentScene = 1;
     }
 });
 
-//Instruction button
-var backButton = new Button ({
+//When on Instruction scene,back button
+var instbackButton = new Button ({
     x: 152,
     y: 322,
-    width: 85,
+    width: 92,
     height: 40,
     label: "Go Back",
     onClick: function() {
-        currentScene = 3;
+        currentScene = 0;
     }
 });
 
 //Back to main menu button
 var mainMenu = new Button ({
-    x: 145,
+    x: 64,
     y: 322,
     width: 106,
     height: 40,
-    label: "Main Menu",
+    label: "   Main Menu",
+    onClick: function() {
+        currentScene = 0;
+    }
+});
+
+//Restart button on game screen
+var restartButton = new Button ({
+    x: 240,
+    y: 322,
+    width: 93,
+    height: 40,
+    label: "Restart",
+    onClick: function() {
+        currentScene = 2;
+        score = 0;
+    }
+});
+
+/**List of questions scene**/ 
+//Scene 3
+var question1 = function() {
+
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("Which of the following function of Array object", 199, 100);
+    text("extracts a section of an array and returns", 179, 124);
+    text("a new array?", 70, 146);
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",75,200);
+    fill(0, 0, 0);
+    text("Slice ()",166,225); // correct answer
+    // Explanation: slice() − Extracts a section of an array and returns a new array.
+    fill(255, 255, 255);
+    ellipse(121,226,12,12);
+    fill(0, 0, 0);
+    text("Shift ()",166,259);  // wrong
+    fill(255, 255, 255);
+    ellipse(121,259,12,12);
+    fill(0, 0, 0);
+    text("Reverse ()",182,289); //wrong
+    fill(255, 255, 255);
+    ellipse(121,291,12,12);
+    
+    backButtonQ.draw();
+
+};
+//Scene 4
+var question2 = function() {
+
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("What does HTML stand for?", 199, 100);
+    
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",75,186);
+    fill(0, 0, 0);
+    text("Hyperlinks and Text Markup Language",225,216); // wrong answer
+    fill(255, 255, 255);
+    ellipse(60,218,12,12);
+    fill(0, 0, 0);
+    text("Hypertext Markup Language",186,250); // correct answer
+    fill(255, 255, 255);
+    ellipse(60,252,12,12);
+    fill(0, 0, 0);
+    text("Home Tool Markup Language",191,284); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(60,286,12,12); 
+    
+    backButtonQ.draw();
+
+};
+//Scene 5
+var question3 = function() {
+
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("What does CSS stand for?", 188, 100);
+    
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",75,186);
+    fill(0, 0, 0);
+    text("Computer Style Sheet",185,216); // wrong answer
+    fill(255, 255, 255);
+    ellipse(85,218,12,12);
+    fill(0, 0, 0);
+    text("Colorful Style Sheet",178,245); // wrong answer
+    fill(255, 255, 255);
+    ellipse(85,246,12,12);
+    fill(0, 0, 0);
+    text("Cascading Style Sheets",194,273); // correct answer
+    fill(255, 255, 255);   
+    ellipse(85,274,12,12); 
+    
+    backButtonQ.draw();
+
+};
+//Scene 6
+var question4 = function() {
+
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("How does a WHILE loop start?", 187, 100);
+    
+    
+    //possible answer
+    fill(0, 21, 255);
+    text("Answer:",75,186);
+    fill(0, 0, 0);
+    text(" while (i <= 10) ",177,216); // correct answer
+    fill(255, 255, 255);
+    ellipse(107,219,12,12);
+    fill(0, 0, 0);
+    text(" while (i <= 10; i++)",192,243); // wrong answer
+    fill(255, 255, 255);
+    ellipse(107,246,12,12);
+    fill(0, 0, 0);
+    text(" while i = 1 to 10",181,271); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(107,272,12,12); 
+    
+    backButtonQ.draw();
+
+};
+//Scene 7
+var question5 = function() {
+
+    //questions asked
+    textSize(18);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("Which of these is not a", 95, 48, 201, 100);
+    text("type of loop in JavaScript?", 198, 127);
+    
+    //possible answer
+    textSize(20);
+    fill(0, 21, 255);
+    text("Answer:",75,183);
+    fill(0, 0, 0);
+    text(" for loop",149,215); // wrong answer
+    fill(255, 255, 255);
+    ellipse(106,217,12,12);
+    fill(0, 0, 0);
+    text(" repeat loop",165,244); // correct answer
+    fill(255, 255, 255);
+    ellipse(106,247,12,12);
+    fill(0, 0, 0);
+    text(" while loop ",163,276); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(106,277,12,12); 
+    
+    backButtonQ.draw();
+
+};
+//Scene 8
+var question6 = function() {
+
+    //questions asked
+    textSize(19);
+    fill(72, 0, 255);
+    text("Question:",75,60);
+    fill(0, 0, 0);
+    text("Which of the following type of variable takes", 200, 100);
+    text("precedence over other if names are same?", 199, 120);
+    
+    
+    //possible answer
+    textSize(20);
+    fill(0, 21, 255);
+    text("Answer:",75,186);
+    fill(0, 0, 0);
+    text(" Gobal Variable",160,221); // wrong answer
+    fill(255, 255, 255);
+    ellipse(88,221,12,12);
+    fill(0, 0, 0);
+    text(" Local Variable",160,251); // correct answer
+    fill(255, 255, 255);
+    ellipse(88,251,12,12);
+    fill(0, 0, 0);
+    text(" All of the Above",166,283); // wrong answer
+    fill(255, 255, 255);   
+    ellipse(88,283,12,12); 
+    
+    backButtonQ.draw();
+
+};
+
+//Question buttons
+var buttonQuestion1 = new Button ({
+    x: 31,
+    y: 117,
+    width: 107,
+    height: 84,
+    label: "100",
+    onClick: function() {
+        currentScene = 3;
+    }
+});
+var buttonQuestion2 = new Button ({
+    x: 148,
+    y: 117,
+    width: 107,
+    height: 84,
+    label: "100",
     onClick: function() {
         currentScene = 4;
     }
 });
+var buttonQuestion3 = new Button ({
+    x: 265,
+    y: 117,
+    width: 107,
+    height: 84,
+    label: "100",
+    onClick: function() {
+        currentScene = 5;
+    }
+});
+var buttonQuestion4 = new Button ({
+    x: 148,
+    y: 208,
+    width: 107,
+    height: 84,
+    label: "200",
+    onClick: function() {
+        currentScene = 6;
+    }
+});
+var buttonQuestion5 = new Button ({
+    x: 265,
+    y: 208,
+    width: 107,
+    height: 84,
+    label: "200",
+    onClick: function() {
+        currentScene = 7;
+    }
+});
+var buttonQuestion6 = new Button ({
+    x: 31,
+    y: 208,
+    width: 107,
+    height: 84,
+    label: "200",
+    onClick: function() {
+        currentScene = 8;
+    }
+});
 
-//First Scene
+/*Splash Scene
+Scene 0 */
 var splashScreen = function() {
     
     //Title
     fill(255, 0, 0);
     textSize(35);
-    text("Computer Science Trivia", 9.5, 73);
+    text("Computer Science", 187, 39);
+    text("Trivia", 192, 83);
     
     //Bitmojis
     fill(255, 255, 255);
@@ -243,259 +527,311 @@ var splashScreen = function() {
     //Creaters
     textSize(20);
     fill(255, 0, 0);
-    text("Created by:", 134,220);
+    text("Created by:", 195,220);
     textSize(18);
     fill(0, 0, 0);
-    text("Dominique Silva", 122, 247);
-    text("&", 177, 268);
-    text("Lee Suy", 153, 284);
+    text("Dominique Silva", 193, 247);
+    text("&", 196, 268);
+    text("Lee Suy", 197, 284);
     
     //Buttons
     startButton.draw();
     instructions.draw();
 
 };
-//Instruction Scene
+
+/*Instruction Scene
+Scene 1 */
 var instructScreen = function(){
 
     //Title
     fill(255, 0, 0);
     textSize(40);
-    text("How to play!", 84, 100);
+    text("How to play!", 195, 100);
 
     //Back Button
-    backButton.draw();
+    instbackButton.draw();
 
 };
 
-//question box design
-var valueBox = function(num) {
-    var recX = num.x;
-    var recY = num.y;
-    
-    //Question box
-    fill(207, 195, 124);
-    rect(recX, recY, 101, 80);
-    fill(0, 98, 255);
-    textSize(50);
-    text(num.value, recX + 6, recY + 58);
-
-    //Score text
+/*Main game screen
+Scene 2 */
+var gameScreen = function() {
+    themeBackGround();
     textSize(25);
-    text("Score: ", 26, 59);
-
-};
-//Gameplay Scene
-var gameScreen = function(){
-
-    //position for question box
-    var positions = [
-            {x: 31, y: 117, value: "100"},
-            {x: 148, y: 117, value: "100"},
-            {x: 265, y: 117, value: "100"},
-            {x: 148, y: 208, value: "200"},
-            {x: 265, y: 208, value: "200"},
-            {x: 31, y: 208, value: "200"},
-          
-        ];
-
-    //for loop for position array
-    for (var i = 0; i < positions.length; i++) {
-        valueBox(positions[i]);
-    }
+    text("Score: " + score, 82, 61);
+    
+    buttonQuestion1.draw();
+    buttonQuestion2.draw();
+    buttonQuestion3.draw();
+    buttonQuestion4.draw();
+    buttonQuestion5.draw();
+    buttonQuestion6.draw();
     
     mainMenu.draw();
+    restartButton.draw();
     
-};
-
-// List of questions
-var question1 = function() {
-
-    //questions asked
-    textSize(18);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("Which of the following function of Array object", 21, 100);
-    text("extracts a section of an array and returns", 22, 124);
-    text("a new array?", 22, 146);
-    
-    //possible answer
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text("Slice ()",130,260); // correct answer
-    // Explanation: slice() − Extracts a section of an array and returns a new array.
-    fill(255, 255, 255);
-    ellipse(113,255,10,10);
-    fill(0, 0, 0);
-    text("Shift ()",130,290);  // wrong
-    fill(255, 255, 255);
-    ellipse(113,285,10,10);
-    fill(0, 0, 0);
-    text("Reverse ()",130,320); //wrong
-    fill(255, 255, 255);
-    ellipse(113,315,10,10);
-
-};
-var question2 = function() {
-
-    //questions asked
-    textSize(18);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("What does HTML stand for?", 85, 100);
-    
-    
-    //possible answer
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text("Hyperlinks and Text Markup Language",73,260); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,255,10,10);
-    fill(0, 0, 0);
-    text("Hypertext Markup Language",73,290); // correct answer
-    fill(255, 255, 255);
-    ellipse(60,285,10,10);
-    fill(0, 0, 0);
-    text("Home Tool Markup Language",73,320); // wrong answer
-    fill(255, 255, 255);   
-    ellipse(60,315,10,10); 
-
-};
-var question3 = function() {
-
-    //questions asked
-    textSize(18);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("What does CSS stand for?", 85, 100);
-    
-    
-    //possible answer
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text("Computer Style Sheet",73,260); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,255,10,10);
-    fill(0, 0, 0);
-    text("Colorful Style Sheet",73,290); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,285,10,10);
-    fill(0, 0, 0);
-    text("Cascading Style Sheets",73,320); // correct answer
-    fill(255, 255, 255);   
-    ellipse(60,315,10,10); 
-
-};
-var question4 = function() {
-
-    //questions asked
-    textSize(18);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("How does a WHILE loop start?", 20, 100);
-    
-    
-    //possible answer
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text(" while (i <= 10) ",73,260); // correct answer
-    fill(255, 255, 255);
-    ellipse(60,255,10,10);
-    fill(0, 0, 0);
-    text(" while (i <= 10; i++)",73,290); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,285,10,10);
-    fill(0, 0, 0);
-    text(" while i = 1 to 10",73,320); // wrong answer
-    fill(255, 255, 255);   
-    ellipse(60,315,10,10); 
-
-};
-var question5 = function() {
-
-    //questions asked
-    textSize(17);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("Which of these is not a type of loop in JavaScript?", 13, 100);
-    
-    
-    //possible answer
-    textSize(20);
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text(" for loop",73,260); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,255,10,10);
-    fill(0, 0, 0);
-    text(" repeat loop",73,290); // correct answer
-    fill(255, 255, 255);
-    ellipse(60,285,10,10);
-    fill(0, 0, 0);
-    text(" while loop ",73,320); // wrong answer
-    fill(255, 255, 255);   
-    ellipse(60,315,10,10); 
-
-};
-var question6 = function() {
-
-    //questions asked
-    textSize(19);
-    fill(72, 0, 255);
-    text("Question:",40,60);
-    fill(0, 0, 0);
-    text("Which of the following type of variable takes", 17, 100);
-    text("precedence over other if names are same?", 22, 120);
-    
-    
-    //possible answer
-    textSize(20);
-    fill(0, 21, 255);
-    text("Answer:",45,230);
-    fill(0, 0, 0);
-    text(" Gobal Variable",73,260); // wrong answer
-    fill(255, 255, 255);
-    ellipse(60,255,10,10);
-    fill(0, 0, 0);
-    text(" Local Variable",73,290); // correct answer
-    fill(255, 255, 255);
-    ellipse(60,285,10,10);
-    fill(0, 0, 0);
-    text(" All of the Above",73,320); // wrong answer
-    fill(255, 255, 255);   
-    ellipse(60,315,10,10); 
 
 };
 
 draw = function() {
+    //println(currentScene);
+    //Draw background
     themeBackGround();
+    
     if(currentScene === 0){ //Splash screen
         splashScreen();
-    } else if(currentScene === 1){ //Game scene
-        gameScreen();
-    } else if(currentScene === 2){ //How to play screen
+    } else if(currentScene === 1){ //How to play screen
         instructScreen();
-    } else if(currentScene === 3){ //Back Button for instructions
-        splashScreen();
-    } else if(currentScene === 4){ //Main menu button for game screen
-        splashScreen();
+    } else if(currentScene === 2){ //Game screen
+        gameScreen();
+    } else if(currentScene === 3){ //Question 1 screen
+        question1();
+    } else if(currentScene === 4){ //Question 2 screen
+        question2();
+    } else if(currentScene === 5){ //Question 3 screen
+        question3();
+    } else if(currentScene === 6){ //Question 4 screen
+        question4();
+    } else if(currentScene === 7){ //Question 5 screen
+        question5();
+    } else if(currentScene === 8){ //Question 6 screen
+        question6();
     }
 };
 
 mouseClicked = function() {
-    startButton.handleMouseClick();
-    instructions.handleMouseClick();
-    backButton.handleMouseClick();
-    mainMenu.handleMouseClick();
+        
+    if(currentScene === 0){ //Splash  screen
+        startButton.handleMouseClick();
+        instructions.handleMouseClick();
+    } else if(currentScene === 1){ //How to play screen
+        instbackButton.handleMouseClick();
+    } else if(currentScene === 2){ //Game screen
+        restartButton.handleMouseClick();
+        mainMenu.handleMouseClick();
+        buttonQuestion1.handleMouseClick();
+        buttonQuestion2.handleMouseClick();
+        buttonQuestion3.handleMouseClick();
+        buttonQuestion4.handleMouseClick();
+        buttonQuestion5.handleMouseClick();
+        buttonQuestion6.handleMouseClick();
+    } else if( (currentScene === 3) || (currentScene === 4) || (currentScene === 5) || (currentScene === 6) || (currentScene === 7) || (currentScene === 8) ){ //Question screen
+        backButtonQ.handleMouseClick();
+    } 
     
+//If statement for question 1 (Scene 3)
+    //Correct answer
+    if( (mouseX > 135 && mouseX < 202 && mouseY > 213 && mouseY < 238) && (currentScene === 3) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(11, 171, 0);
+        ellipse(121,226,12,12);
+        textSize(20);
+        text("Correct!", 310, 375);
+        image(getImage("creatures/Hopper-Jumping"), 290, 283, 75, 75); //Happy Hopper
+        score +=100;
+        noLoop();
+    } 
+    //Wrong answer
+    else if ( (mouseX > 135 && mouseX < 203 && mouseY > 247 && mouseY < 272) && (currentScene === 3) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(255, 0, 0);
+        ellipse(121,259,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Happy Hopper
+        score -=100;
+        noLoop();
+    }
+    //Wrong answer
+    else if ( (mouseX > 135 && mouseX < 228 && mouseY > 277 && mouseY < 302) && (currentScene === 3) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(255, 0, 0);
+        ellipse(121,291,12,12);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Happy Hopper
+        score -=100;
+        noLoop();
+    }
+    
+   
+//If statement for question 2 (Scene 4)
+    //Wrong answer
+    if( (mouseX > 68 && mouseX < 380 && mouseY > 204 && mouseY < 230) && (currentScene === 4) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(255, 0, 0);
+        ellipse(60,218,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=100;
+        noLoop();
+    } 
+    //Correct Answer
+    else if ( (mouseX > 68 && mouseX < 307 && mouseY > 239 && mouseY < 265) && (currentScene === 4) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(11, 171, 0);
+        ellipse(60,252,12,12);
+        textSize(20);
+        text("Correct!", 310, 365);
+        image(getImage("creatures/Hopper-Jumping"), 275, 280, 75, 75); //Oh noes Hopper
+        score +=100;
+        noLoop();
+    }
+    //Wrong Answer
+    else if ( (mouseX > 68 && mouseX < 211 && mouseY > 273 && mouseY < 299) && (currentScene === 4) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(255, 0, 0);
+        ellipse(60,286,12,12);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Oh noes Hopper
+        score -=100;
+        noLoop();
+    }
+    
+    
+//If statement for question 3 (Scene 5)
+    //Wrong answer
+    if( (mouseX > 76 && mouseX < 277 && mouseY > 205 && mouseY < 229) && (currentScene === 5) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(255, 0, 0);
+        ellipse(85,218,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=100;
+        noLoop();
+    } 
+    //Wrong Answer
+    else if ( (mouseX > 76 && mouseX < 277 && mouseY > 233 && mouseY < 254) && (currentScene === 5) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(255, 0, 0);
+        ellipse(85,246,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=100;
+        noLoop();
+    }
+    //Correct Answer
+    else if ( (mouseX > 76 && mouseX < 291 && mouseY > 261 && mouseY < 285) && (currentScene === 5) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(11, 171, 0);
+        ellipse(85,274,12,12);
+        text("Correct!", 310, 365);
+        image(getImage("creatures/Hopper-Happy"), 275, 280, 75, 75); //Oh noes Hopper
+        score +=100;
+        noLoop();
+    }
+    
+    
+//If statement for question 4 (Scene 6)
+    //Correct answer
+    if( (mouseX > 97 && mouseX < 236 && mouseY > 205 && mouseY < 230) && (currentScene === 6) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(11, 171, 0);
+        ellipse(107,219,12,12);
+        textSize(20);
+        text("Correct!", 310, 375);
+        image(getImage("creatures/Hopper-Happy"), 290, 286, 75, 75); //Oh noes Hopper
+        score +=200;
+        noLoop();
+    } 
+    //Wrong Answer
+    else if ( (mouseX > 97 && mouseX < 277 && mouseY > 233 && mouseY < 254) && (currentScene === 6) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(255, 0, 0);
+        ellipse(107,246,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    }
+    //Wrong Answer
+    else if ( (mouseX > 97 && mouseX < 250 && mouseY > 262 && mouseY < 287) && (currentScene === 6) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(255, 0, 0);
+        ellipse(107,272,12,12);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    }
+   
+   
+//If statement for question 5 (Scene 7)
+    //Wrong answer
+    if( (mouseX > 96 && mouseX < 196 && mouseY > 201 && mouseY < 229) && (currentScene === 7) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(255, 0, 0);
+        ellipse(106,217,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    } 
+    //Correct Answer
+    else if ( (mouseX > 96 && mouseX < 220 && mouseY > 231 && mouseY < 259) && (currentScene === 7) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(11, 171, 0);
+        ellipse(106,247,12,12);
+        textSize(20);
+        text("Correct!", 310, 375);
+        image(getImage("creatures/Hopper-Happy"), 290, 286, 75, 75); //Oh noes Hopper
+        score +=200;
+        noLoop();
+    }
+    //Wrong Answer
+    else if ( (mouseX > 96 && mouseX < 210 && mouseY > 263 && mouseY < 291) && (currentScene === 7) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(255, 0, 0);
+        ellipse(106,277,12,12);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    }
+   
+   
+//If statement for question 6 (Scene 8)
+    //Wrong answer
+    if( (mouseX > 76 && mouseX < 230 && mouseY > 206 && mouseY < 234) && (currentScene === 8) && (question !== 2) && (question !== 3)){
+        question = 1;
+        fill(255, 0, 0);
+        ellipse(88,221,12,12);
+        textSize(20);
+        text("Incorrect!", 310, 375);
+        image(getImage("creatures/OhNoes"), 290, 286, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    } 
+    //Correct Answer
+    else if ( (mouseX > 76 && mouseX < 230 && mouseY > 238 && mouseY < 266) && (currentScene === 8) && (question !== 1) && (question !== 3)){
+        question = 2;
+        fill(11, 171, 0);
+        ellipse(88,251,12,12);
+        textSize(20);
+        text("Correct!", 310, 375);
+        image(getImage("creatures/Hopper-Happy"), 290, 286, 75, 75); //Oh noes Hopper
+        score +=200;
+        noLoop();
+    }
+    //Wrong Answer
+    else if ( (mouseX > 76 && mouseX < 241 && mouseY > 269 && mouseY < 297) && (currentScene === 8) && (question !== 2) && (question !== 1)){
+        question = 3;
+        fill(255, 0, 0);
+        ellipse(88,283,12,12);
+        text("Incorrect!", 310, 365);
+        image(getImage("creatures/OhNoes"), 275, 280, 75, 75); //Oh noes Hopper
+        score -=200;
+        noLoop();
+    }
+   
+   
+   
 };
+
+
+
