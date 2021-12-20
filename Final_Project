@@ -549,7 +549,18 @@ var instructScreen = function(){
     //Title
     fill(255, 0, 0);
     textSize(40);
-    text("How to play!", 195, 100);
+    text("How to play!", 195, 50);
+    textSize(18);
+    fill(0, 0, 0);
+    text("The game consists of six tiles, that range from", 196, 100);
+    text("100 to 200 points per question. Each question", 196, 125);
+    text("will have 3 possible answer. Pick the correct ", 196, 150);
+    text("answer, you will be rewarded by how much the", 198, 173);
+    text("tile is worth. Otherwise you lose the points", 196, 196);
+
+    text("You can always RESTART", 196, 250);
+
+    
 
     //Back Button
     instbackButton.draw();
