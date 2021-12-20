@@ -8,6 +8,7 @@ var instructScreen;
 var gameScreen; 
 var score = 0;
 var question = 0;
+var answeredQuestion = false; 
 
 //Draws blackboard and boarders
 var themeBackGround = function() {
@@ -192,6 +193,7 @@ var backButtonQ = new Button ({
     label: "Go Back",
     onClick: function() {
         currentScene = 2;
+        answeredQuestion = false; 
         loop();
     }
 });
@@ -616,14 +618,16 @@ mouseClicked = function() {
         buttonQuestion4.handleMouseClick();
         buttonQuestion5.handleMouseClick();
         buttonQuestion6.handleMouseClick();
-    } else if( (currentScene === 3) || (currentScene === 4) || (currentScene === 5) || (currentScene === 6) || (currentScene === 7) || (currentScene === 8) ){ //Question screen
-        backButtonQ.handleMouseClick();
     } 
+    else if (currentScene > 2) {
+
     
-//If statement for question 1 (Scene 3)
+    backButtonQ.handleMouseClick();
+    
+    //If statement for question 1 (Scene 3)
     //Correct answer
-    if( (mouseX > 135 && mouseX < 202 && mouseY > 213 && mouseY < 238) && (currentScene === 3) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 111 && mouseX < 211 && mouseY > 213 && mouseY < 239) && (currentScene === 3) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(121,226,12,12);
         textSize(20);
@@ -633,8 +637,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Wrong answer
-    else if ( (mouseX > 135 && mouseX < 203 && mouseY > 247 && mouseY < 272) && (currentScene === 3) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 111 && mouseX < 211 && mouseY > 246 && mouseY < 272) && (currentScene === 3) && !answeredQuestion){
+        answeredQuestion = true; 
         fill(255, 0, 0);
         ellipse(121,259,12,12);
         textSize(20);
@@ -644,8 +648,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Wrong answer
-    else if ( (mouseX > 135 && mouseX < 228 && mouseY > 277 && mouseY < 302) && (currentScene === 3) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 111 && mouseX < 226 && mouseY > 278 && mouseY < 304) && (currentScene === 3) && !answeredQuestion){
+        answeredQuestion = true; 
         fill(255, 0, 0);
         ellipse(121,291,12,12);
         text("Incorrect!", 310, 365);
@@ -657,8 +661,8 @@ mouseClicked = function() {
    
 //If statement for question 2 (Scene 4)
     //Wrong answer
-    if( (mouseX > 68 && mouseX < 380 && mouseY > 204 && mouseY < 230) && (currentScene === 4) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 49 && mouseX < 380 && mouseY > 204 && mouseY < 230) && (currentScene === 4) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(60,218,12,12);
         textSize(20);
@@ -668,8 +672,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Correct Answer
-    else if ( (mouseX > 68 && mouseX < 307 && mouseY > 239 && mouseY < 265) && (currentScene === 4) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 49 && mouseX < 302 && mouseY > 239 && mouseY < 265) && (currentScene === 4) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(60,252,12,12);
         textSize(20);
@@ -679,8 +683,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Wrong Answer
-    else if ( (mouseX > 68 && mouseX < 211 && mouseY > 273 && mouseY < 299) && (currentScene === 4) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 49 && mouseX < 302 && mouseY > 272 && mouseY < 299) && (currentScene === 4) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(60,286,12,12);
         text("Incorrect!", 310, 365);
@@ -692,8 +696,8 @@ mouseClicked = function() {
     
 //If statement for question 3 (Scene 5)
     //Wrong answer
-    if( (mouseX > 76 && mouseX < 277 && mouseY > 205 && mouseY < 229) && (currentScene === 5) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 75 && mouseX < 276 && mouseY > 203 && mouseY < 229) && (currentScene === 5) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(85,218,12,12);
         textSize(20);
@@ -703,8 +707,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Wrong Answer
-    else if ( (mouseX > 76 && mouseX < 277 && mouseY > 233 && mouseY < 254) && (currentScene === 5) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 75 && mouseX < 276 && mouseY > 232 && mouseY < 258) && (currentScene === 5) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(85,246,12,12);
         textSize(20);
@@ -714,8 +718,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Correct Answer
-    else if ( (mouseX > 76 && mouseX < 291 && mouseY > 261 && mouseY < 285) && (currentScene === 5) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 75 && mouseX < 292 && mouseY > 259 && mouseY < 285) && (currentScene === 5) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(85,274,12,12);
         text("Correct!", 310, 365);
@@ -727,8 +731,8 @@ mouseClicked = function() {
     
 //If statement for question 4 (Scene 6)
     //Correct answer
-    if( (mouseX > 97 && mouseX < 236 && mouseY > 205 && mouseY < 230) && (currentScene === 6) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 96 && mouseX < 235 && mouseY > 203 && mouseY < 229) && (currentScene === 6) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(107,219,12,12);
         textSize(20);
@@ -738,8 +742,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Wrong Answer
-    else if ( (mouseX > 97 && mouseX < 277 && mouseY > 233 && mouseY < 254) && (currentScene === 6) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 96 && mouseX < 270 && mouseY > 231 && mouseY < 257) && (currentScene === 6) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(107,246,12,12);
         textSize(20);
@@ -749,8 +753,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Wrong Answer
-    else if ( (mouseX > 97 && mouseX < 250 && mouseY > 262 && mouseY < 287) && (currentScene === 6) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 96 && mouseX < 248 && mouseY > 262 && mouseY < 288) && (currentScene === 6) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(107,272,12,12);
         text("Incorrect!", 310, 365);
@@ -762,8 +766,8 @@ mouseClicked = function() {
    
 //If statement for question 5 (Scene 7)
     //Wrong answer
-    if( (mouseX > 96 && mouseX < 196 && mouseY > 201 && mouseY < 229) && (currentScene === 7) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 96 && mouseX < 190 && mouseY > 200 && mouseY < 226) && (currentScene === 7) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(106,217,12,12);
         textSize(20);
@@ -773,8 +777,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Correct Answer
-    else if ( (mouseX > 96 && mouseX < 220 && mouseY > 231 && mouseY < 259) && (currentScene === 7) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 96 && mouseX < 220 && mouseY > 232 && mouseY < 258) && (currentScene === 7) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(106,247,12,12);
         textSize(20);
@@ -784,8 +788,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Wrong Answer
-    else if ( (mouseX > 96 && mouseX < 210 && mouseY > 263 && mouseY < 291) && (currentScene === 7) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 96 && mouseX < 220 && mouseY > 265 && mouseY < 291) && (currentScene === 7) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(106,277,12,12);
         text("Incorrect!", 310, 365);
@@ -797,8 +801,8 @@ mouseClicked = function() {
    
 //If statement for question 6 (Scene 8)
     //Wrong answer
-    if( (mouseX > 76 && mouseX < 230 && mouseY > 206 && mouseY < 234) && (currentScene === 8) && (question !== 2) && (question !== 3)){
-        question = 1;
+    if( (mouseX > 78 && mouseX < 231 && mouseY > 206 && mouseY < 232) && (currentScene === 8) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(88,221,12,12);
         textSize(20);
@@ -808,8 +812,8 @@ mouseClicked = function() {
         noLoop();
     } 
     //Correct Answer
-    else if ( (mouseX > 76 && mouseX < 230 && mouseY > 238 && mouseY < 266) && (currentScene === 8) && (question !== 1) && (question !== 3)){
-        question = 2;
+    else if ( (mouseX > 78 && mouseX < 231 && mouseY > 239 && mouseY < 265) && (currentScene === 8) && !answeredQuestion){
+        answeredQuestion = true;
         fill(11, 171, 0);
         ellipse(88,251,12,12);
         textSize(20);
@@ -819,8 +823,8 @@ mouseClicked = function() {
         noLoop();
     }
     //Wrong Answer
-    else if ( (mouseX > 76 && mouseX < 241 && mouseY > 269 && mouseY < 297) && (currentScene === 8) && (question !== 2) && (question !== 1)){
-        question = 3;
+    else if ( (mouseX > 78 && mouseX < 240 && mouseY > 271 && mouseY < 297) && (currentScene === 8) && !answeredQuestion){
+        answeredQuestion = true;
         fill(255, 0, 0);
         ellipse(88,283,12,12);
         text("Incorrect!", 310, 365);
@@ -828,10 +832,12 @@ mouseClicked = function() {
         score -=200;
         noLoop();
     }
+    
+    }
    
-   
-   
+
 };
+
 
 
 
